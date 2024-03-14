@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GPS test XD</title>
+
+    <!-- leaflet css  -->
+    <link rel="stylesheet" href="leaflet.css" />
+
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+        }
+
+        #map {
+            width: 100%;
+            height: 100vh;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="map"></div>
+</body>
+</html>
+
+<!-- leaflet js  -->
+<script src="https://unpkg.com/mqtt/dist/mqtt.min.js"></script>
+<script src="leaflet.js"></script>
+<script>
+
+    // connection option
+const options = {
+  		clean: true, // retain session
+      connectTimeout: 4000, // Timeout period
+      // Authentication information
+      clientId: 'navegadorGPS',
+      username: 'test',
+      password: 'CloudTech*',
+      keepalive: 60,
+
+}
+
+
+const connectUrl = 'ws://18.212.130.131:8083/mqtt'
+const client = mqtt.connect(connectUrl, options)
+
+client.on('connect', () => {
+    console.log('MQTT conectado con exito')
+
+    client.subscribe('prueba/mapa/angular/coordenadas' , {qos:0}, (error) => {
+        if(!error){
+            console.log('subscripcion exitosaaaaaaaaaaaaaaaaaaaaaaaa!')
+        }
+    })
+
+})
+
+client.on('reconnect', (error) => {
+    console.log('reconectando:', error)
+})
+
+client.on('error', (error) => {
+    console.log('Conexión fallida:', error)
+})
+
+client.on('message', (topic, message) => {
+  console.log('mensaje recibido：', topic, message.toString())
+  getPosition(JSON.parse(message))
+
+})
+
+    // Map initialization 
+    var map = L.map('map').setView([10.9831158, -74.7952174], 15);
+
+    //osm layer
+    var osm = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+    });
+    osm.addTo(map);
+
+    if(!navigator.geolocation) {
+        console.log("Your browser doesn't support geolocation feature!")
+    } else {
+        setInterval(() => {
+            //navigator.geolocation.getCurrentPosition(getPosition)
+        }, 10000);
+    }
+
+    var marker, circle;
+
+    function getPosition(position){
+        //los datos procedientes del topico mqtt vienen con el formato json {"latitud":"10.980000", "longitud":"-74.795000"}
+}
+
+        // console.log(position)
+        var lat = position.latitud
+        var long = position.longitud
+        var accuracy = 10 //position.coords.accuracy
+
+        if(marker) {
+            map.removeLayer(marker)
+        }
+
+        if(circle) {
+            map.removeLayer(circle)
+        }
+
+        marker = L.marker([lat, long])
+        circle = L.circle([lat, long], {radius: accuracy})
+
+        var featureGroup = L.featureGroup([marker, circle]).addTo(map)
+
+        map.fitBounds(featureGroup.getBounds())
+
+        console.log("Your coordinate is: Lat: "+ lat +" Long: "+ long+ " Accuracy: "+ accuracy)
+    }
+
+</script>
