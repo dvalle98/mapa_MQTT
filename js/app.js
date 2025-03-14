@@ -26,7 +26,8 @@ document.addEventListener('DOMContentLoaded', () => {
         showSpeed: document.getElementById('showSpeed'),
         toggleMap: document.getElementById('toggleMap'),
         toggleSpeedChart: document.getElementById('toggleSpeedChart'),
-        toggleGauge: document.getElementById('toggleGauge')
+        toggleGauge: document.getElementById('toggleGauge'),
+        toggleGPS: document.getElementById('toggleGPS')
     };
 
     let state = {
@@ -106,7 +107,8 @@ document.addEventListener('DOMContentLoaded', () => {
             options: { 
                 responsive: true,
                 maintainAspectRatio: false,
-                scales: { y: { beginAtZero: true } }
+                scales: { y: { beginAtZero: true } },
+                plugins: {display: false}
             }
         });
     }
@@ -253,7 +255,8 @@ document.addEventListener('DOMContentLoaded', () => {
         const widgets = {
             map: document.getElementById('map-container'),
             speedChart: document.getElementById('speedChart-container'),
-            gauge: document.getElementById('gauge-container')
+            gauge: document.getElementById('gauge-container'),
+            textLabel: document.getElementById('gps-data-header')
         };
 
         // Validar elementos
@@ -274,11 +277,15 @@ document.addEventListener('DOMContentLoaded', () => {
             if (elements.map) elements.map.invalidateSize();
             if (elements.chart) elements.chart.resize();
             if (speedGauge) speedGauge.update();
+            if (widgets.textLabel) widgets.textLabel.classList.toggle('d-none', !state.widgets.textLabel);
         }, 300);
     }
 
-    function saveWidgetsConfig() {
+    // Event listener for widget configuration form
+    elements.dataConfigWidgetsForm.addEventListener('submit', (e) => {
+        e.preventDefault();
         state.widgets = {
+            textLabel: document.getElementById('toggleGPS').checked,
             map: document.getElementById('toggleMap').checked,
             speedChart: document.getElementById('toggleSpeedChart').checked,
             gauge: document.getElementById('toggleGauge').checked
@@ -288,12 +295,6 @@ document.addEventListener('DOMContentLoaded', () => {
         applyWidgetsConfig();
         const modal = bootstrap.Modal.getInstance('#widgetsConfigModal');
         if (modal) modal.hide();
-    }
-
-    // Event listener for widget configuration form
-    elements.dataConfigWidgetsForm.addEventListener('submit', (e) => {
-        e.preventDefault();
-        saveWidgetsConfig();
     });
 
     elements.dataConfigForm.addEventListener('submit', (e) => {

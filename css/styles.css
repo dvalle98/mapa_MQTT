@@ -33,14 +33,28 @@ body {
     border-radius: 15px;
     box-shadow: 0 4px 6px rgba(0,0,0,0.1);
     padding: 15px;
+    display: flex; 
+    flex-direction: column; 
+}
+
+#speedChart-container {
+    flex: 1;
+    position: relative;
+}
+
+#speedChart {
+    width: 100% !important;
+    height: 100% !important;
+    min-height: 200px;
 }
 
 #map-container {
-    height: 600px;
+    height: 700px;
     border-radius: 15px;
     overflow: hidden;
     grid-column: 1 / -1;
 }
+
 
 /* Modal de configuración */
 .modal-content {
@@ -55,6 +69,7 @@ body {
     background: var(--secondary-color);
     font-weight: 600;
     letter-spacing: 0.5px;
+    padding-top: 20px;
 }
 
 .form-check-label {
