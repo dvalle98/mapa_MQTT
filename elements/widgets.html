@@ -1,0 +1,37 @@
+<!-- Widgets -->
+<div class="widget">
+    <div class="widget-header">
+        <h5><i class="fas fa-map-marker-alt"></i> Posición Actual</h5>
+    </div>
+    <div id="gps-data">
+        <p>Lat: <span id="latitude">0.0000</span></p>
+        <p>Lon: <span id="longitude">0.0000</span></p>
+    </div>
+</div>
+
+<div class="widget">
+    <h5><i class="fas fa-tachometer-alt"></i> Histórico Velocidad</h5>
+    <canvas id="speedChart"></canvas>
+</div>
+
+<div class="widget">
+    <h5><i class="fas fa-tachometer-alt me-2"></i>Velocidad</h5>
+    <div class="gauge-container">
+        <canvas id="speedGauge"></canvas>
+    </div>
+</div>
+
+<div class="progress" id="nivelBateria">
+    <div id="batteryLevel" class="progress-bar" style="width: 75%">
+        <i class="fas fa-battery-three-quarters"></i> 75%
+    </div>
+</div>
+
+
+<!-- Mapa -->
+<div class="card" id="map-container">
+    <div class="card-header">
+        <h5><i class="fas fa-map"></i> Mapa en Tiempo Real</h5>
+    </div>
+    <div id="map" style="height: 100%"></div>
+</div>

@@ -1,0 +1,98 @@
+/* Variables globales */
+:root {
+    --primary-color: #2c3e50;
+    --secondary-color: #3498db;
+    --background: #f8f9fa;
+}
+
+/* Estilos generales */
+body {
+    margin: 0;
+    font-family: 'Arial', sans-serif;
+    background: var(--background);
+    c
+}
+
+/* Barra de navegación */
+.navbar {
+    background: var(--primary-color) !important;
+    padding: 1rem;
+}
+
+/* Dashboard y widgets */
+.dashboard-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+    gap: 1rem;
+    padding: 20px;
+}
+
+.widget {
+    height: 300px;
+    background: rgb(255, 255, 255);
+    border-radius: 15px;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+    padding: 15px;
+}
+
+#map-container {
+    height: 600px;
+    border-radius: 15px;
+    overflow: hidden;
+    grid-column: 1 / -1;
+}
+
+/* Modal de configuración */
+.modal-content {
+    border-radius: 10px;
+}
+
+/* Estilos de los botones */
+.bg-info { background-color: #17a2b8!important; }
+.border-info { border-color: #17a2b8!important; }
+
+.card-header {
+    background: var(--secondary-color);
+    font-weight: 600;
+    letter-spacing: 0.5px;
+}
+
+.form-check-label {
+    user-select: none;
+    cursor: pointer;
+}
+
+/* Contenedor del gauge */
+.gauge-container {
+    width: 200px;  /* Tamaño base */
+    height: 200px;
+    margin: 0 auto; /* Centrar horizontalmente */
+}
+
+/* Canvas responsivo */
+#speedGauge {
+    width: 120% !important;
+    height: 120% !important;
+}
+
+/* Para móviles */
+@media (max-width: 768px) {
+    .gauge-container {
+        width: 150px;
+        height: 150px;
+    }
+}
+
+.widget-hidden {
+    display: none !important;
+}
+
+.widget-visible {
+    display: block;
+    animation: fadeIn 0.3s ease-in;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
