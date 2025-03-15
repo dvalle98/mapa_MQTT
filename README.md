@@ -2,7 +2,7 @@
 
 ![image](https://github.com/user-attachments/assets/4d914eaa-03b5-4464-b8c1-dfc80bcc1e27)
 
-
+Dale un vistazo: [Dashboard GPS](https://dvalle98.github.io/mapa_MQTT/)
 
 Herramienta de visualización para proyectos IoT con GPS. Desarrollada para estudiantes y entusiastas que necesitan monitorear dispositivos en tiempo real usando protocolo MQTT.
 
