@@ -1,6 +1,7 @@
 # Mapa MQTT en Tiempo Real para Dispositivos GPS 🛰️📍
 
-![image](https://github.com/user-attachments/assets/cdbdf943-5181-4bdd-a0b9-a61775f09812)
+![image](https://github.com/user-attachments/assets/4d914eaa-03b5-4464-b8c1-dfc80bcc1e27)
+
 
 
 Herramienta de visualización para proyectos IoT con GPS. Desarrollada para estudiantes y entusiastas que necesitan monitorear dispositivos en tiempo real usando protocolo MQTT.
@@ -50,7 +51,11 @@ Accede al dashboard: [http://localhost:3000](http://localhost:3000)
    - Tópico de suscripción (ej: `dispositivos/+/datos`)
 3. Guarda los cambios
 
-![image](https://github.com/user-attachments/assets/c7be8191-1386-4211-9a08-7892e065ffb0)
+![image](https://github.com/user-attachments/assets/8ffee77f-1bac-4ff1-9150-78d1e9225dcf)
+
+![image](https://github.com/user-attachments/assets/bf28e9ab-2975-4abb-a1e7-86df8486ba51)
+
+
 
 
 ## Formato de Datos Requerido 📨
