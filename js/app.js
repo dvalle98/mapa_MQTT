@@ -38,7 +38,8 @@ document.addEventListener('DOMContentLoaded', () => {
         widgets: {
             map: true,
             speedChart: true,
-            gauge: true
+            gauge: true,
+            battery: true
         }
     };
 
@@ -176,6 +177,8 @@ document.addEventListener('DOMContentLoaded', () => {
             if (state.dataConfig.showLat && data.lat) filteredData.lat = data.lat;
             if (state.dataConfig.showLon && data.lon) filteredData.lon = data.lon;
             if (state.dataConfig.showSpeed && data.spd) filteredData.spd = data.spd;
+            if (data.volt) filteredData.volt = data.volt;
+            if (data.charging !== undefined) filteredData.charging = data.charging;
 
             updateUI(filteredData);
         } catch (err) {
@@ -209,6 +212,41 @@ document.addEventListener('DOMContentLoaded', () => {
         if (data.spd !== undefined) {
             speedGauge.value = data.spd;
             speedGauge.update();
+        }
+
+        updateBattery(data);
+    }
+
+    function updateBattery(data) {
+        console.log('Datos de batería:', data);
+        const batteryLevel = document.getElementById('batteryLevel');
+        const batteryPercent = document.getElementById('batteryPercent');
+        const chargingStatus = document.getElementById('chargingStatus');
+        
+        if(data.volt !== undefined) {
+            const level = Math.min(Math.max(data.volt, 0), 100);
+            console.log('Nivel de batería:', data.volt);
+            
+            // Actualizar nivel visual
+            batteryLevel.style.width = `${level}%`;
+            batteryPercent.textContent = `${level}%`;
+            
+            // Actualizar color según nivel
+            if(level <= 20) {
+                batteryLevel.setAttribute('data-level', 'low');
+            } else if(level <= 60) {
+                batteryLevel.setAttribute('data-level', 'medium');
+            } else {
+                batteryLevel.setAttribute('data-level', 'high');
+            }
+        }
+        
+        // Estado de carga
+        if(data.charging !== undefined) {
+            chargingStatus.style.display = 'block';
+            chargingStatus.textContent = data.charging ? 
+                "⚡ Cargando..." : "🔌 Desconectado";
+            chargingStatus.style.color = data.charging ? "#4CAF50" : "#ff5722";
         }
     }
 
@@ -248,6 +286,8 @@ document.addEventListener('DOMContentLoaded', () => {
             document.getElementById('toggleMap').checked = state.widgets.map;
             document.getElementById('toggleSpeedChart').checked = state.widgets.speedChart;
             document.getElementById('toggleGauge').checked = state.widgets.gauge;
+            document.getElementById('toggleBattery').checked = state.widgets.battery;
+            document.getElementById('toggleGPS').checked = state.widgets.textLabel;
         }
     }
 
@@ -256,7 +296,8 @@ document.addEventListener('DOMContentLoaded', () => {
             map: document.getElementById('map-container'),
             speedChart: document.getElementById('speedChart-container'),
             gauge: document.getElementById('gauge-container'),
-            textLabel: document.getElementById('gps-data-header')
+            textLabel: document.getElementById('gps-data-container'),
+            battery: document.getElementById('battery-container')
         };
 
         // Validar elementos
@@ -278,6 +319,7 @@ document.addEventListener('DOMContentLoaded', () => {
             if (elements.chart) elements.chart.resize();
             if (speedGauge) speedGauge.update();
             if (widgets.textLabel) widgets.textLabel.classList.toggle('d-none', !state.widgets.textLabel);
+            if (widgets.battery) widgets.battery.classList.toggle('d-none', !state.widgets.battery);
         }, 300);
     }
 
@@ -288,7 +330,8 @@ document.addEventListener('DOMContentLoaded', () => {
             textLabel: document.getElementById('toggleGPS').checked,
             map: document.getElementById('toggleMap').checked,
             speedChart: document.getElementById('toggleSpeedChart').checked,
-            gauge: document.getElementById('toggleGauge').checked
+            gauge: document.getElementById('toggleGauge').checked,
+            battery: document.getElementById('toggleBattery').checked
         };
 
         localStorage.setItem('widgetsConfig', JSON.stringify(state.widgets));

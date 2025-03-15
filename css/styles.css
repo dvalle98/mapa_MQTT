@@ -111,3 +111,76 @@ body {
     from { opacity: 0; }
     to { opacity: 1; }
 }
+
+/* Estilos para el widget de batería */
+.battery-wrapper {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin-top: 1rem;
+}
+
+.battery {
+    margin-top: 40px;
+    margin-left: 20px;
+    width: 250px;
+    height: 100px;
+    border: 5px solid var(--primary-color);
+    border-radius: 15px;
+    position: relative;
+    background: #f8f9fa;
+}
+
+.battery-tip {
+    position: absolute;
+    right: -10px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 10px;
+    height: 25px;
+    background: var(--primary-color);
+    border-radius: 0 2px 2px 0;
+}
+
+.battery-level {
+    height: 100%;
+    width: 30%; /* Valor inicial - se actualizará con JS */
+    background: #4CAF50;
+    transition: width 0.5s ease, background 0.5s ease;
+    position: relative;
+    border-radius: 10px;
+}
+
+.battery-level::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(to bottom, 
+        rgba(255,255,255,0.2) 0%,
+        rgba(255,255,255,0.1) 50%,
+        rgba(0,0,0,0.1) 51%,
+        rgba(0,0,0,0.05) 100%);
+}
+
+.battery-percent {
+    margin-left: 50px;
+    margin-top: 35px;
+    font-size: 2.5rem;
+    font-weight: bold;
+    color: var(--primary-color);
+}
+
+.charging-status {
+    margin-top: 0.5rem;
+    font-size: 1.9rem;
+    color: #666;
+    display: none;
+}
+
+/* Colores según el nivel */
+.battery-level[data-level="low"] { background: #ff5722; }
+.battery-level[data-level="medium"] { background: #ffc107; }
+.battery-level[data-level="high"] { background: #4CAF50; }
