@@ -50,7 +50,8 @@ Accede al dashboard: [http://localhost:3000](http://localhost:3000)
    - Tópico de suscripción (ej: `dispositivos/+/datos`)
 3. Guarda los cambios
 
-![Configuración MQTT](link-imagen-config.png)
+![image](https://github.com/user-attachments/assets/c7be8191-1386-4211-9a08-7892e065ffb0)
+
 
 ## Formato de Datos Requerido 📨
 Los dispositivos deben enviar datos en este formato JSON:
