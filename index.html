@@ -19,24 +19,26 @@
 
 <body>
 
-    <!-- Barra Superior -->
-    <nav class="navbar navbar-dark bg-dark">
-        <div class="container-fluid">
-            <a class="navbar-brand" href="#">
-                <i class="fas fa-satellite"></i> MQTT GPS Dashboard
-            </a>
-            <!-- Botón para abrir el modal de widgets -->
+<!-- Barra Superior -->
+<nav class="navbar navbar-dark bg-dark">
+    <div class="container-fluid d-flex justify-content-between align-items-center">
+        <a class="navbar-brand" href="#">
+            <i class="fas fa-satellite"></i> MQTT GPS Dashboard
+        </a>
+        <div class="d-flex gap-1"> <!-- Contenedor de botones -->
             <button class="btn btn-secondary" onclick="toggleWidgetsConfig()">
-                <i class="fas fa-th-large me-2"></i>Personalizar Widgets
+                <i class="fas fa-th-large me-2"></i>Widgets
             </button>
-            <button class="btn btn-info ms-2" onclick="toggleDataConfig()">
+            <button class="btn btn-info" onclick="toggleDataConfig()">
                 <i class="fas fa-sliders me-2"></i>Filtros
             </button>
             <button class="btn btn-light" onclick="toggleConfig()">
                 <i class="fas fa-cog"></i> Configuración
             </button>
         </div>
-    </nav>
+    </div>
+</nav>
+
 
     <!-- Contenedor Principal -->
     <div class="dashboard-grid">
@@ -262,7 +264,7 @@
 
                         <div class="mt-4 text-center">
                             <button type="submit" class="btn btn-primary btn-lg px-5">
-                                <i class="fas fa-save me-2"></i>Guardar y conectar
+                                <i class="fas fa-save me-2"></i>Guardar
                             </button>
                         </div>
                     </form>
